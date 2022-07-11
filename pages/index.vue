@@ -2,18 +2,16 @@
   <div class="app">
     <AppHeader @filter="filterBooks" />
     <div class="cardsContainer">
-      <div v-for="(book, index) in currentBookList" :key="index" class="card">
-        <section class="imgContainer">
-          <img :src="book.image" alt="" />
-        </section>
-        <section class="bookDescription">
-          <h3 class="bookTitle">{{ book.title }}</h3>
-          <p>{{ book.author }}</p>
-          <p class="bookSummary">{{ book.summary }}</p>
-          <p>Note: {{ book.note }}/5</p>
-          <p>Année de parution: {{ book.dateOfCreation }}</p>
-        </section>
-      </div>
+      <BookCard
+        v-for="(book, index) in currentBookList"
+        :key="index"
+        :title="book.title"
+        :image="book.image"
+        :author="book.author"
+        :summary="book.summary"
+        :note="book.note"
+        :date="book.dateOfCreation"
+      />
     </div>
   </div>
 </template>
@@ -33,18 +31,15 @@ export default {
   },
   methods: {
     async getAllBooks() {
-      this.books = []
-      const data = await axios.get('http://192.168.1.20:1213/')
-      data.data.forEach((book) => {
-        this.books.push(book)
-      })
+      const data = await axios.get('http://192.168.1.20:4000/')
+      this.books = data.data
       this.currentBookList = this.books
     },
-    filterBooks(searchKey) {
+    filterBooks(search) {
       this.currentBookList = this.books.filter(function (obj) {
         return Object.keys(obj).some(function (key) {
           if (typeof obj[key] === 'string') {
-            return obj[key].toLowerCase().includes(searchKey.toLowerCase());
+            return obj[key].toLowerCase().includes(search.toLowerCase())
           }
           return false
         })

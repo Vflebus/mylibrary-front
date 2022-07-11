@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>Ma Librairie</h1>
-    <input v-model="search" type="search" placeholder="Search for a book" class="searchInput" autocomplete="off" @input="filterBooks" />
+    <input v-model="search" type="search" placeholder="Chercher un livre" class="searchInput" autocomplete="off" @input="triggerBookFiltering" />
   </header>
 </template>
 
@@ -14,7 +14,7 @@ export default {
     }
   },
   methods: {
-    filterBooks() {
+    triggerBookFiltering() {
       this.$emit('filter', this.search);
     }
   }
