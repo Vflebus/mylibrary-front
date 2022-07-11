@@ -27,11 +27,14 @@ export default {
     }
   },
   async fetch() {
-    await this.getAllBooks()
+      const data = await axios.get('https://mylibrary-back.herokuapp.com/');
+      this.books = data.data
+      this.currentBookList = this.books
   },
   methods: {
     async getAllBooks() {
-      const data = await axios.get(process.env.BACKEND_URL);
+      console.log(`fetching https://mylibrary-back.herokuapp.com/`);
+      const data = await axios.get('https://mylibrary-back.herokuapp.com/');
       this.books = data.data
       this.currentBookList = this.books
     },
