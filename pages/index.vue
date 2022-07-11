@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     async getAllBooks() {
-      const data = await axios.get('http://192.168.1.20:4000/')
+      const data = await axios.get(process.env.BACKEND_URL);
       this.books = data.data
       this.currentBookList = this.books
     },
