@@ -14,6 +14,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  ssr: false,
+  target: 'server',
+
   // See website on phone too
   server: {
     host: '0.0.0.0' // default: localhost
